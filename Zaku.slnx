@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="Zaku.API/Zaku.API.csproj" />
+    <Project Path="Zaku.Application/Zaku.Application.csproj" />
+    <Project Path="Zaku.Domain/Zaku.Domain.csproj" />
+    <Project Path="Zaku.Infrastructure/Zaku.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="Zaku.Tests/Zaku.Tests.csproj" />
+  </Folder>
+</Solution>
