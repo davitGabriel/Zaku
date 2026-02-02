@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Zaku.Application.Auth.DTOs;
+using Zaku.Application.DTOs.Auth;
 using Zaku.Application.Interfaces;
 
 namespace Zaku.API.Controllers

@@ -14,7 +14,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddApplication();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -37,7 +37,7 @@ builder.Services.AddSwaggerGen(o =>
 {
     o.CustomSchemaIds(id => id.FullName!.Replace('+', '-'));
 
-    var securityScheme = new OpenApiSecurityScheme
+    OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme
     {
         Name = "JWT Authentication",
         Description = "Enter JWT Bearer",
@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(o =>
     o.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, securityScheme);
 });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.UseGlobalExceptionHandler();
 

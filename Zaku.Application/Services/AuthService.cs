@@ -1,4 +1,4 @@
-﻿using Zaku.Application.Auth.DTOs;
+﻿using Zaku.Application.DTOs.Auth;
 using Zaku.Application.Interfaces;
 using Zaku.Domain.Entities;
 using Zaku.Domain.Enums;
@@ -27,9 +27,9 @@ namespace Zaku.Application.Services
             if (await _userRepository.AnyAsync(u => u.Email == request.Email))
                 throw new InvalidOperationException("Email already registered");
 
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-            var user = new User
+            User user = new User
             {
                 Id = Guid.NewGuid(),
                 Email = request.Email!,
@@ -42,19 +42,19 @@ namespace Zaku.Application.Services
             await _userRepository.AddAsync(user);
             await _unitOfWork.SaveChangesAsync();
 
-            var token = _jwtTokenService.CreateToken(user);
+            string token = _jwtTokenService.CreateToken(user);
 
             return new AuthResponse { AccessToken = token, UserId = user.Id.ToString() };
         }
 
         public async Task<AuthResponse> LoginAsync(LoginRequest request)
         {
-            var user = await _userRepository.FirstOrDefaultAsync(u => u.Email == request.Email);
+            User? user = await _userRepository.FirstOrDefaultAsync(u => u.Email == request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
                 throw new UnauthorizedAccessException("Invalid credentials");
 
-            var token = _jwtTokenService.CreateToken(user);
+            string token = _jwtTokenService.CreateToken(user);
 
             return new AuthResponse
             {

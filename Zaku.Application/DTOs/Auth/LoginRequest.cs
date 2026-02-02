@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zaku.Application.Auth.DTOs
+namespace Zaku.Application.DTOs.Auth
 {
     public record LoginRequest
     {

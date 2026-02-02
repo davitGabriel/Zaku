@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace Zaku.Application.Auth.DTOs
+namespace Zaku.Application.DTOs.Auth
 {
     public record AuthResponse
     {
